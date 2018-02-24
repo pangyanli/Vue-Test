@@ -3,13 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <title>10_过渡&动画2</title>
+  <style>
+    .bounce-enter-active{
+      animation:bounce-in 2s
+    }
+    .bounce-leave-active{
+      animation:bounce-in 1s reverse
+    }
+    @keyframes bounce-in {
+      0% {transform:scale(0)}
+      50%{transform:scale(1.5)}
+      100%{transform:scale(1)}
+    }
+  </style>
 
 </head>
 <body>
 <div id="demo">
-  <button @click="isShow=!isShow">Toggle</button>
-  <transition name="fade">
-    <p>Lean Html oppoe</p>
+  <button @click="isShow=!isShow">Toggle</button> <br>
+  <transition name="bounce">
+    <p v-show="isShow" style="display: inline-block">Lean Html oppoe</p>
   </transition>
 </div>
 <script type="text/javascript" src="../js/vue.js"></script>

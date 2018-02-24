@@ -23,11 +23,56 @@
   beforeDestory(): 做收尾工作, 如: 清除定时器
 -->
 
-<div>
-
+<div id="demo">
+  <button @click="killVue">Kill Vue</button>
+  <p v-show="isShow">{{msg}}</p>
 </div>
 
 <script type="text/javascript" src="../js/vue.js"></script>
-<script type="text/javascript"></script>
+<script type="text/javascript">
+  new Vue({
+    el: '#demo',
+    data: {
+      msg: '尚硅谷',
+     isShow: true
+    },
+    beforeCreate(){ // 创建vue对象之前
+      console.log('beforeCreate()' + this.msg)
+    },
+    created(){ // 创建vue对象之后
+      console.log('created()' + this.msg)
+        this.intervalId = setInterval(() => {// 注意this的指向如果回调函数不是箭头函数的，this是window并不是vm
+          console.log('--------')
+          this.isShow = !this.isShow
+        },1000)
+    },
+    beforeMount(){ // 挂载之前
+      console.log('beforeMount()' + this.msg)
+    },
+    mounted(){ // 挂载之后
+      console.log('mounted()' + this.msg)
+    },
+    beforeUpdate(){ // 更新之前
+      console.log('beforeUpdate()' + this.msg)
+    },
+    updated(){ // 更新之后
+      console.log('updated()' + this.msg)
+    },
+    beforeDestroy(){ // 销毁之前
+      //清理定时器
+      clearInterval(this.intervalId)
+      console.log('beforeDestroy()' + this.msg)
+    },
+    destroyed(){ // 销毁之后
+      console.log('destroyed()' + this.msg)
+    },
+
+    methods:{  // 点击按钮销毁vue对象
+      killVue(){
+        this.$destroy()
+      }
+    }
+  })
+</script>
 </body>
 </html>
