@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>01_HelloWorld</title>
+</head>
+<body>
+<!--
+  1. 引入Vue.js
+  2. 创建Vue实例对象，代表MVVM(Model View ViewModel)中的 ViewModel
+    el : 指定根element(选择器),代表vue所管理的区域，代表View
+    data : 初始化数据(页面可以访问) ，代表MVVM(Model View ViewModel)中的 Model
+  3. 双向数据绑定 : v-model （数据从内存中自动在页面显示）
+  4. 显示数据 : {{xxx}}
+  5. 理解vue的mvvm实现
+-->
+  <div id="app">
+    <input type="text" v-model="username">
+    <p>Hello {{username}}</p>
+  </div>
+  <script type="text/javascript" src="../js/vue.js"></script>
+  <script type="text/javascript">
+    const vm = new Vue({  // 创建Vue的实例对象 vm代表ViewModel
+      el:'#app',  // el: 即element元素，是指vue所管理的区域
+      data:{  // 数据：代表MVVM(Model View ViewModel)中的 Model
+        username:'atguigu'
+      }
+    })
+  </script>
+</body>
+</html>
