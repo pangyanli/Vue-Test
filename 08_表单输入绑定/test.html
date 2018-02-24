@@ -8,38 +8,40 @@
 <!--
 1. 使用v-model(双向数据绑定)自动收集数据
   text/textarea
-  checkbox
-  radio
-  select
+  checkbox 多选框
+  radio 单选框
+  select 下拉单选框
 -->
 <div id="demo">
-  <form action="/xxx">
+  <!--@click.prevent阻止提交跳转的默认行为-->
+  <form action="/xxx" @submit.prevent="handleSubmit">
     <span>用户名: </span>
-    <input type="text"><br>
+    <input type="text" v-model="user.username"><br>
 
     <span>密码: </span>
-    <input type="password"><br>
+    <input type="password" v-model="user.pwd"><br>
 
     <span>性别: </span>
-    <input type="radio" id="female">
+    <input type="radio" id="female" value="female" v-model="user.sex">
     <label for="female">女</label>
-    <input type="radio" id="male">
+    <input type="radio" id="male" value="male" v-model="user.sex">
     <label for="male">男</label><br>
 
     <span>爱好: </span>
-    <input type="checkbox" id="basket" >
+    <input type="checkbox" id="basket" value="basketball" v-model="user.hobbys">
     <label for="basket">篮球</label>
-    <input type="checkbox" id="foot">
+    <input type="checkbox" id="foot" value="football" v-model="user.hobbys">
     <label for="foot">足球</label>
-    <input type="checkbox" id="pingpang">
+    <input type="checkbox" id="pingpang" value="pingpangball" v-model="user.hobbys">
     <label for="pingpang">乒乓</label><br>
 
     <span>城市: </span>
-    <select>
+    <select v-model="user.cityId">
       <option value="">未选择</option>
+      <option v-for="city in allCitys" :value="city.id">{{city.name}}</option>
     </select><br>
     <span>介绍: </span>
-    <textarea rows="10"></textarea><br><br>
+    <textarea rows="10" v-model="user.describe"></textarea><br><br>
 
     <input type="submit" value="注册">
   </form>
@@ -47,7 +49,25 @@
 
 <script type="text/javascript" src="../js/vue.js"></script>
 <script type="text/javascript">
-
+  new Vue({
+    el: '#demo',
+    data: {
+      user:{
+        username: '',
+        pwd: '',
+        sex: 'female',
+        hobbys: ['basket'],
+        cityId: '',
+        describe: ''
+      },
+      allCitys: [{id:1, name:'北京'},{id:2, name:'上海'},{id:3, name:'深圳'},{id:4, name:'广州'}]
+    },
+    methods: {
+      handleSubmit(){
+        alert(JSON.stringify(this.user))
+      }
+    }
+  })
 </script>
 </body>
 </html>
