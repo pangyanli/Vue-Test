@@ -27,10 +27,47 @@
   1. 功能类型于v-text, 但转换为全大写
   2. 功能类型于v-text, 但转换为全小写
 -->
+<div id="test">
+  <p>{{msg}}</p>
+  <p v-uppercasetext="msg">{{msg}}</p>
+  <p v-lowercasetext="msg">{{msg}}</p>
+</div>
+<hr>
+<div id="test2">
+  <p>{{msg}}</p>
+  <p v-uppercasetext="msg">{{msg}}</p>
+  <!-- lowercasetext 是test的局部指令，外部不能使用-->
+  <p v-lowercasetext="msg">{{msg}}</p>
+</div>
 
 <script type="text/javascript" src="../js/vue.js"></script>
 <script type="text/javascript">
-
+  // 注册一个全局指令
+  // el: 代表指令属性所在的标签
+  // binding: 包含指令相关数据的对象
+  Vue.directive('uppercasetext',function(el,binding){
+    el.textContent = binding.value.toUpperCase()
+  })
+ new Vue({
+   el: '#test',
+   data: {
+     msg: 'I Like You'
+   },
+   //注册局部指令
+   directives:{
+     'lowercasetext': {
+       bind(el, binding){
+         el.innerHTML = binding.value.toLowerCase()
+       }
+     }
+   }
+ })
+  new Vue({
+    el: '#test2',
+    data: {
+      msg: 'I Like You'
+    },
+  })
 </script>
 </body>
 </html>

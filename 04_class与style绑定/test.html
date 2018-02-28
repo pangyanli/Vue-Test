@@ -7,6 +7,12 @@
     .classA{
       color: red;
     }
+    .classB{
+      background: pink;
+    }
+    .classC{
+      font-size: 30px;
+    }
   </style>
 </head>
 <body>
@@ -26,9 +32,12 @@
 
 <div id="demo">
   <h2>1. class绑定: :class='xxx'</h2>
-  <p class="classA">class绑定1</p>
+  <p class="classA" :class="a">表达式是字符串: 'classC'</p>
+  <p :class="{classA:isA, classB: isB}">表达式是对象: {classA:isA, classB: isB}</p>
+  <p :class="['classB', 'classC']"> 表达式是数组: ['classA', 'classB']</p>
 
   <h2>2. style绑定</h2>
+  <p :style="{color, fontSize}">style="{ color: activeColor, fontSize: fontSize + 'px' }"</p>
 
 </div>
 
@@ -37,7 +46,11 @@
   new Vue({
     el: '#demo',
     data:{
-
+      a: 'classC',
+      isA: false,
+      isB: true,
+      color: 'green',
+      fontSize:'20px'
     }
   })
 </script>

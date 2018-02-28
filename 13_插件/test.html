@@ -5,10 +5,24 @@
   <title>17_插件</title>
 </head>
 <body>
-
+  <div id="demo">
+    <p v-my_directive ="msg"></p>
+  </div>
 <script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript" src="vue-myPlugin.js"></script>
 <script type="text/javascript">
-
+  //声明使用插件，内部会调用install方法，即安装插件
+  Vue.use(MyPlugin)
+  //调用插件提供的全局方法
+  Vue.myGlobalMethod()
+  const vm = new Vue({
+    el: '#demo',
+    data: {
+      msg: 'atguigu'
+    }
+  })
+  // 调用插件提供的实例方法
+  vm.$myMethod()
 </script>
 </body>
 </html>
